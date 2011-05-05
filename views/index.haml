@@ -1,0 +1,10 @@
+%h1 Home
+%ul.entries
+  - @entries.each do |entry|
+    %li
+      %img{:src => entry.cover.small, :alt => entry.title}
+      %h2= entry.title
+      .isbn= entry.isbn 
+      .author= entry.creators
+      %p.description= entry.description
+      

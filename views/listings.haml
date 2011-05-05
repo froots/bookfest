@@ -1,0 +1,5 @@
+%h2 Listings
+%ul.listings
+  - @listings.each do |entry|
+    %li
+      %h3= entry["event_desc"]
