@@ -63,9 +63,10 @@ get "/listings/:date" do |date|
 end
 
 get "/books/:query" do |query|
-  @query = query
-  search_query = query.gsub /[&]/, ''
-  @entries = Google::Book.search(search_query, :count => 25)
+  @queries = query.split(/,|and|&|with/).unshift(query).uniq
+  @searches = @queries.map do |q|
+    Google::Book.search(q, :count => 25)
+  end  
   haml :books
 end
 

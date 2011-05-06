@@ -1,12 +1,13 @@
 %ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
-  %li{:"data-role" => "list-divider"} 
-    Books matching 
-    = @query
-  - @entries.each do |entry|
-    %li.ui-li-has-thumb
-      %a.ui-link-inherit{:href => "#"}
-        %img.ui-li-thumb{:src => entry.cover.thumbnail}
-        %h3.ui-li-heading= entry.title
+  - @searches.each_with_index do |search, i|
+    %li{:"data-role" => "list-divider"} 
+      Books matching 
+      = @queries[i]
+    - search.entries.each do |entry|
+      %li.ui-li-has-thumb
+        %a.ui-link-inherit{:href => "#"}
+          %img.ui-li-thumb{:src => entry.cover.thumbnail}
+          %h3.ui-li-heading= entry.title
         
         
         / 'cover' => self.cover,
