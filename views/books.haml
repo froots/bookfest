@@ -1,0 +1,22 @@
+%ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
+  %li{:"data-role" => "list-divider"} 
+    Books matching 
+    = @query
+  - @entries.each do |entry|
+    %li.ui-li-has-thumb
+      %a.ui-link-inherit{:href => "#"}
+        %img.ui-li-thumb{:src => entry.cover.thumbnail}
+        %h3.ui-li-heading= entry.title
+        
+        
+        / 'cover' => self.cover,
+        /        'creators' => self.creators,
+        /        'date' => self.date,
+        /        'description' => self.description,
+        /        'format' => self.format,
+        /        'info' => self.info,
+        /        'preview' => self.preview,
+        /        'publisher' => self.publisher,
+        /        'subjects' => self.subjects,
+        /        'title' => self.title,
+        /        'isbn' => self.isbn

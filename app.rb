@@ -43,7 +43,7 @@ class Google::Book::Cover
 end
 
 get "/css/:sheet.css" do |sheet|
-  sass :"css/#{sheet}"
+  scss :"css/#{sheet}"
 end
 
 get "/" do
@@ -62,9 +62,11 @@ get "/listings/:date" do |date|
   haml :listings
 end
 
-get "/search/:query" do |query|
-  @entries = Google::Book.search(query, :count => 25)
-  haml :index
+get "/books/:query" do |query|
+  @query = query
+  search_query = query.gsub /[&]/, ''
+  @entries = Google::Book.search(search_query, :count => 25)
+  haml :books
 end
 
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
