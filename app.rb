@@ -51,7 +51,7 @@ get "/" do
   haml :index
 end
 
-get "/listings/:date" do |date|
+get "/listings/:date" do |date| 
   startDate = date.gsub('-', '').to_i
   endDate = startDate + 1
   url = "http://projects.festivalslab.com/2010/api/v1/listings.json?start=#{startDate}&end=#{endDate}&venue_code=Charlotte%20Square%20Gardens"
