@@ -1,5 +1,6 @@
 require 'google/book'
 require 'json'
+require 'chronic'
 
 class Google::Book::Response 
   def to_json(*a)    
@@ -42,6 +43,17 @@ class Google::Book::Cover
   end
 end
 
+helpers do
+  def friendly_date(str)
+    begin
+      date = Chronic.parse(str)
+      date.strftime('%e %B %Y') unless date.nil?
+    rescue
+      return
+    end
+  end
+end
+
 get "/css/:sheet.css" do |sheet|
   scss :"css/#{sheet}"
 end
@@ -54,7 +66,7 @@ end
 get "/listings/:date" do |date| 
   @start_date = date.gsub('-', '').to_i
   @end_date = @start_date + 1
-  @display_date = Date.parse(date)
+  @display_date = Chronic.parse(date)
   url = "http://projects.festivalslab.com/2010/api/v1/listings.json?start=#{@start_date}&end=#{@end_date}&venue_code=Charlotte%20Square%20Gardens"
   listings = RestClient.get(url)
   @listings = JSON.parse(listings)

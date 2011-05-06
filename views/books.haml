@@ -5,9 +5,13 @@
       = @queries[i]
     - search.entries.each do |entry|
       %li.ui-li-has-thumb
-        %a.ui-link-inherit{:href => "#"}
+        %a.book-link.ui-link-inherit{:href => "#"}
           %img.ui-li-thumb{:src => entry.cover.thumbnail}
           %h3.ui-li-heading= entry.title
+          %p.author= entry.creators
+          %p.ui-li-aside.ui-li-desc.date= friendly_date(entry.date)
+        .book-details.hide
+          
         
         
         / 'cover' => self.cover,
