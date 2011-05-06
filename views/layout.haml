@@ -10,15 +10,15 @@
 
 %body
   %div{:"data-role" => "page"}
-    %div{:"data-role" => "header"}
-      %h1 Page Title
+    %div{:"data-role" => "header", :"data-position" => "fixed"}
+      %h1 BookFest
                 
     %div{:"data-role" => "content"}
 
       = yield
 
-    %div{:"data-role" => "footer"}
-      %h2 Page Footer
+    %div{:"data-role" => "footer", :"data-position" => "fixed"}
+      %h2
      
   :javascript
     var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];

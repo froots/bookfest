@@ -1,4 +1,4 @@
-%ul
+%ul{:"data-role" => "listview", :"data-inset" => "true"}
   - @date_range.each do |day|
     %li
       %a{:href => "/listings/#{day}"}= day.strftime('%e %B')

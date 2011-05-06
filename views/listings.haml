@@ -1,5 +1,10 @@
-%h2 Listings
-%ul.listings
+%ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
+  %li{:"data-role" => "list-divider"} 
+    Events on 
+    =@display_date.strftime('%e %B')
   - @listings.each do |entry|
     %li
-      %h3= entry["event_desc"]
+      %a{:href => "/event/#{entry['event_desc']}"}
+        %h3.ui-li-heading= entry["event_desc"]
+        %p.ui-li-desc= entry["event_info"]
+        %p.ui-li-aside.ui-li-desc= entry["start_time_hhmm"]
