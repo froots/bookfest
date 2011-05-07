@@ -74,6 +74,11 @@ get "/listings/:date" do |date|
   haml :listings
 end
 
+get "/books/detail/:isbn" do |isbn|
+  @book = Google::Book.search(isbn, :count => 25).entries.first
+  haml :details
+end
+
 get "/books/:query" do |query|
   @queries = query.split(/,|and|&|with/).unshift(query).uniq
   @searches = @queries.map do |q|
