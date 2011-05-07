@@ -127,6 +127,15 @@ get "/guardian/article/*" do |splat|
   haml :guardian_article
 end
 
+get "/tweets/author/:author" do |author|
+  search_author = '"' + author + '"'
+  twitter_response = RestClient.get "http://search.twitter.com/search.json?q=#{CGI::escape(search_author)}"
+  res = JSON.parse(twitter_response)
+  @author = author
+  @tweets = res["results"]
+  haml :tweets
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1
