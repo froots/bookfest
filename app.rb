@@ -62,6 +62,15 @@ helpers do
     end
   end
   
+  def friendly_standard_date_time(str)
+    begin
+      date = Time.parse(str)
+      date.strftime('%k.%M%P, %e %B %Y') unless date.nil?
+    rescue
+      return
+    end
+  end
+  
   def remove_comments(str)
     str.gsub(/<!--.*-->/, '').strip
   end

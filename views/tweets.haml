@@ -6,7 +6,10 @@
   - @tweets.each do |tweet|
     %li
       %img.tweet-thumb{:src => tweet["profile_image_url"]}
-      %h3= tweet["from_user"]
+      %h3
+        = tweet["from_user"]
+        %span.time
+          = friendly_standard_date_time(tweet["created_at"])
       %p= tweet["text"]
       
      
