@@ -1,13 +1,19 @@
 %h2= @book.title
-%img{:src => @book.cover.medium}
-%p.authors= @book.creators
-%p.publication-date= friendly_date(@book.date)
-%p.description= @book.description
-%p.subjects= @book.subjects
-%p.format= @book.format
-%p.publisher= @book.publisher
-- if !@book.preview.nil?
-  %a.preview{:href => @book.preview} Google Preview
-- if !@book.info.nil?
-  %a.info{:href => @book.info} Google Info
+%div{:"data-role" => "collapsible"}
+  %h3 Book details
+  .ui-grid-a
+    .ui-block-a
+      %img{:src => @book.cover.small}
+    .ui-block-b
+      %p.authors= @book.creators
+      %p.publication-date= friendly_date(@book.date)
+      %p.description= @book.description
+      %p.subjects= @book.subjects
+      %p.format= @book.format
+      %p.publisher= @book.publisher
+  %div{:"data-inline" => "true"}
+    - if !@book.preview.nil?
+      %a.preview{:href => @book.preview, :"data-role" => "button", :"data-inline" => "true"} Google Preview
+    - if !@book.info.nil?
+      %a.info{:href => @book.info, :"data-role" => "button", :"data-inline" => "true"} Google Info
   
