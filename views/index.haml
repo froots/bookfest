@@ -1,4 +1,6 @@
+%h2 Edinburgh International Book Festival
 %ul{:"data-role" => "listview", :"data-inset" => "true"}
+  %li{:"data-role" => "list-divider", :"data-dividertheme" => "c", :role => "heading"} Choose a day
   - @date_range.each do |day|
     %li
       %a{:href => "/listings/#{day}"}= day.strftime('%e %B')
