@@ -97,6 +97,14 @@ get "/books/:query" do |query|
   haml :books
 end
 
+get "/guardian/author/:author" do |author|
+  guardian_response = RestClient.get "http://content.guardianapis.com/search?q=%22#{CGI::escape(author)}%22&section=books&format=json&api-key=chdscot"
+  json_response = JSON.parse(guardian_response)
+  @res = json_response["response"]
+  @author = author
+  haml :guardian_author
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1

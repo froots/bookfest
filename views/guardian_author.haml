@@ -1,0 +1,9 @@
+%ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
+  %li{:"data-role" => "list-divider"} 
+    Guardian articles about
+    = @author
+  - @res["results"].each do |result|
+    %li
+      %a{:href => "#"}
+        %h3.ui-li-heading= result["webTitle"]
+        / %p.ui-li-desc= entry["event_info"]
