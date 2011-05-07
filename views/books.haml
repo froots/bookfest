@@ -1,14 +1,25 @@
-%ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
-  - @searches.each_with_index do |search, i|
-    %li{:"data-role" => "list-divider"}= @authors[i]
-    %li{:"data-role" => "list-divider", :"data-dividertheme" => "c"}
+- @searches.each_with_index do |search, i|  
+    
+  %ul{:"data-role" => "listview", :"data-inset" => "true"}  
+    %li{:"data-role" => "list-divider", :"data-dividertheme" => "c", :role => "heading"}
+      Stuff about
+      = @authors[i]
+    %li 
       %a{:href => "/guardian/author/#{@authors[i]}"} 
         Guardian stories about 
         = @authors[i]
-    %li{:"data-role" => "list-divider", :"data-dividertheme" => "c"}
+    %li
       %a{:href => "/tweets/author/#{@authors[i]}"}
         Tweets about
         = @authors[i]
+    %li
+      %a{:href => "/sign/#{@authors[i]}"}
+        Ask for the author's signature!
+        
+  %ul{:"data-role" => "listview", :"data-inset" => "true"}
+    %li{:"data-role" => "list-divider", :"data-dividertheme" => "c", :role => "heading"}
+      = @authors[i]
+      bibliography
     - search.entries.each do |entry|
       %li.ui-li-has-thumb
         %a.book-link.ui-link-inherit{:href => "/books/detail/#{entry.isbn}"}

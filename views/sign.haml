@@ -1,0 +1,53 @@
+%ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
+  %li{:"data-role" => "list-divider"} Author signature
+
+%h3 
+  Ask
+  = @author
+  to sign below:
+
+#canvasContainer
+  %canvas#signCanvas{:height => "300"}
+
+%div{:"data-inline" => "true"}
+  %a.cancel{:"data-role" => "button", :href => "#", :"data-inline" => "true", :"data-icon" => "delete"} Cancel
+  %a.save{:"data-role" => "button", :href => "#", :"data-theme" => "b", :"data-inline" => "true", :"data-icon" => "check"} Save
+
+:javascript
+
+  window.setTimeout(function() {
+    $('#signCanvas')
+    		.attr('width', $('#canvasContainer').width())
+    		.attr('height', $('#canvasContainer').height());
+
+    var demos = {};
+    demos.draw = function() {
+        var demoCanvas = $('#signCanvas')[0],
+            context = demoCanvas.getContext('2d'),
+            eventMonitor = demos.eventMonitor = INTERACT.watch(demoCanvas);
+
+        // handle pointer down events
+        eventMonitor.bind('pointerDown', function(evt, absXY, relXY) {
+            // demos.status('pointer down', 300);
+
+            context.beginPath();
+            context.moveTo(relXY.x, relXY.y);
+        });
+
+        // handle pointer move events
+        eventMonitor.bind('pointerMove', function(evt, absXY, relXY, deltaXY) {
+            context.lineTo(relXY.x, relXY.y);
+            context.stroke();
+
+            // demos.status('delta = x: ' + deltaXY.x + ', y: ' + deltaXY.y + '');
+        });
+
+        // handle pointer up events
+        eventMonitor.bind('pointerUp', function(evt, absXY, relXY, deltaXY) {
+            // demos.status('pointer up', 300);
+        });
+    };
+
+    demos.draw();
+  }, 500);
+  

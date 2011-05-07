@@ -145,6 +145,11 @@ get "/tweets/author/:author" do |author|
   haml :tweets
 end
 
+get "/sign/:author" do |author|
+  @author = author
+  haml :sign
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1
