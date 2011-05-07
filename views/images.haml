@@ -1,0 +1,11 @@
+%h4 
+  This is what
+  =@author
+  looks like
+  
+%ul.google-images
+  - @google_responses.each do |set|
+    - set.each do |img|
+      %li
+        %img{:src => img["tbUrl"]}
+  

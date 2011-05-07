@@ -150,6 +150,20 @@ get "/sign/:author" do |author|
   haml :sign
 end
 
+get "/images/:author" do |author|
+  @author = author
+  search_author = '"' + author + '"'
+  search_url = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=#{CGI::escape(search_author)}"
+  @google_responses = []
+  (0..5).each do |i|
+    this_url = search_url + "&start=" + (i*4).to_s
+    response = RestClient.get(this_url)
+    parsed_response = JSON.parse(response)
+    @google_responses.push(parsed_response["responseData"]["results"])
+  end
+  haml :images
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1

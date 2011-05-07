@@ -14,7 +14,14 @@
         = @authors[i]
     %li
       %a{:href => "/sign/#{@authors[i]}"}
-        Ask for the author's signature!
+        Ask for 
+        =#{@authors[i]}
+        signature!
+    %li
+      %a{:href => "/images/#{@authors[i]}"}
+        What the f**k does
+        = @authors[i]
+        look like, anyway?
         
   %ul{:"data-role" => "listview", :"data-inset" => "true"}
     %li{:"data-role" => "list-divider", :"data-dividertheme" => "c", :role => "heading"}
