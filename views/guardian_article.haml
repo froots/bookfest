@@ -9,4 +9,10 @@
       = @fields["publication"]
   %p.intro= @fields["trailText"]
   %img.article-thumb{:src => @fields["thumbnail"]}
-  .content= @fields["body"]
+  - if remove_comments(@fields["body"]).empty?
+    .content
+      %p Content for this article is protected.
+  - else
+    .content= @fields["body"]
+  %a{:"data-role" => "button", :"data-inline" => "true", :href => @content["webUrl"]} 
+    View article on guardian.co.uk

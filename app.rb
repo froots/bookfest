@@ -61,6 +61,10 @@ helpers do
       return
     end
   end
+  
+  def remove_comments(str)
+    str.gsub(/<!--.*-->/, '').strip
+  end
 end
 
 get "/css/:sheet.css" do |sheet|
