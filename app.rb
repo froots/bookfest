@@ -52,6 +52,15 @@ helpers do
       return
     end
   end
+  
+  def friendly_standard_date(str) 
+    begin
+      date = Time.parse(str)
+      date.strftime('%e %B %Y') unless date.nil?
+    rescue
+      return
+    end
+  end
 end
 
 get "/css/:sheet.css" do |sheet|
@@ -98,7 +107,7 @@ get "/books/:query" do |query|
 end
 
 get "/guardian/author/:author" do |author|
-  guardian_response = RestClient.get "http://content.guardianapis.com/search?q=%22#{CGI::escape(author)}%22&section=books&format=json&api-key=chdscot"
+  guardian_response = RestClient.get "http://content.guardianapis.com/search?q=%22#{CGI::escape(author)}%22&section=books&format=json&api-key=chdscot&show-fields=thumbnail"
   json_response = JSON.parse(guardian_response)
   @res = json_response["response"]
   @author = author

@@ -4,6 +4,6 @@
     = @author
   - @res["results"].each do |result|
     %li
-      %a{:href => "#"}
+      %a{:href => "/guardian/article/#{result['id']}"}
         %h3.ui-li-heading= result["webTitle"]
-        / %p.ui-li-desc= entry["event_info"]
+        %p.ui-li-desc= friendly_standard_date(result["webPublicationDate"])
