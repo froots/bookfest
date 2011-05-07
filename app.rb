@@ -164,6 +164,10 @@ get "/images/:author" do |author|
   haml :images
 end
 
+get "/info" do 
+  haml :info
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1
