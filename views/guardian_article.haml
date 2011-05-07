@@ -1,0 +1,12 @@
+%article
+  %h2= @content["webTitle"]
+  %p.publication
+    Published on
+    %time{:datetime => @content["webPublicationDate"]}
+      = friendly_standard_date(@content["webPublicationDate"])
+    in
+    %span.publication
+      = @fields["publication"]
+  %p.intro= @fields["trailText"]
+  %img.article-thumb{:src => @fields["thumbnail"]}
+  .content= @fields["body"]

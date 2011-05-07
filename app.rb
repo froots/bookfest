@@ -114,6 +114,15 @@ get "/guardian/author/:author" do |author|
   haml :guardian_author
 end
 
+get "/guardian/article/*" do |splat|
+  guardian_response = RestClient.get "http://content.guardianapis.com/#{splat}?format=json&show-fields=all&order-by=newest&api-key=chdscot"
+  json_response = JSON.parse(guardian_response)
+  @res = json_response["response"]
+  @content = @res["content"]
+  @fields = @content["fields"]
+  haml :guardian_article
+end
+
 get %r{/json/([a-zA-Z0-9\s]+)\/?(\d*)} do
   query = params[:captures][0]
   page = 1

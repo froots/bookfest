@@ -1,3 +1,34 @@
 .ui-li-thumb {
   max-width: 50px;
 }
+
+article {
+  font-family: Cambria, Georgia, "Times New Roman", serif;
+}
+
+article h2 {
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+article p {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+article p.intro {
+  font-size: 18px;
+  font-style: italic;
+  color: #555;
+}
+
+article p.publication {
+  font-size: 14px;
+  color: #555;
+  text-align: right;
+}
+
+article img.article-thumb {
+  float: right;
+  margin: 0 0 10px 15px;
+}
