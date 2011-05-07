@@ -1,8 +1,6 @@
 %ul.listings{:"data-role" => "listview", :"data-dividertheme" => "b"}
   - @searches.each_with_index do |search, i|
-    %li{:"data-role" => "list-divider"} 
-      Books matching 
-      = @queries[i]
+    %li{:"data-role" => "list-divider"}= @authors[i]
     - search.entries.each do |entry|
       %li.ui-li-has-thumb
         %a.book-link.ui-link-inherit{:href => "/books/detail/#{entry.isbn}"}

@@ -70,7 +70,6 @@ get "/listings/:date" do |date|
   url = "http://projects.festivalslab.com/2010/api/v1/listings.json?start=#{@start_date}&end=#{@end_date}&venue_code=Charlotte%20Square%20Gardens"
   listings = RestClient.get(url)
   @listings = JSON.parse(listings)
-  puts @listings.first
   haml :listings
 end
 
@@ -80,10 +79,21 @@ get "/books/detail/:isbn" do |isbn|
 end
 
 get "/books/:query" do |query|
-  @queries = query.split(/,|and|&|with/).unshift(query).uniq
-  @searches = @queries.map do |q|
+  searches = query.split(/,|and|&|with/).unshift(query).uniq.map do |q|
     Google::Book.search(q, :count => 25)
-  end  
+  end
+  all_authors = searches.map do |search|
+    search.entries.map do |entry|
+      entry.creators.split(/,\s?/)
+    end
+  end
+  @authors = all_authors.flatten.uniq.keep_if { |author| query.include? author }
+  @searches = @authors.map do |author|
+    Google::Book.search(author, :count => 25)
+  end
+  if !@authors.length
+    @searches = searches
+  end
   haml :books
 end
 
